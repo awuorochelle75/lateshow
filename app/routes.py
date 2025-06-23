@@ -75,3 +75,13 @@ def create_appearance():
     except Exception as e:
         db.session.rollback()
         return jsonify({"errors": [str(e)]}), 400
+
+@routes.route("/guests/<int:id>", methods=["DELETE"])
+def delete_guest(id):
+    guest = Guest.query.get(id)
+    if not guest:
+        return jsonify({"error": "Guest not found"}), 404
+
+    db.session.delete(guest)
+    db.session.commit()
+    return jsonify({"message": "Guest deleted successfully"}), 200
