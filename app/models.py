@@ -8,6 +8,7 @@ class Guest(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    occupation = db.Column(db.String, nullable=False)  # ✅ added field
 
     appearances = db.relationship('Appearance', backref='guest', cascade='all, delete-orphan')
 
@@ -15,7 +16,8 @@ class Episode(db.Model):
     __tablename__ = 'episodes'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
+    date = db.Column(db.String, nullable=False)    # ✅ changed from title to date
+    number = db.Column(db.Integer, nullable=False) # ✅ added field
 
     appearances = db.relationship('Appearance', backref='episode', cascade='all, delete-orphan')
 
